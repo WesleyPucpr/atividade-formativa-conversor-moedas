@@ -32,13 +32,7 @@ def main():
 
     print("Available currencies:", ", ".join(currencies))
 
-    try:
-        amount = float(input("Insira o valor a ser convertido: "))
-        from_currency = input("Insira a moeda de origem (e.g., USD): ").upper()
-        to_currency = input("Insira a moeda de destino (e.g., EUR): ").upper()
 
-        if from_currency not in currencies or to_currency not in currencies:
-            print("Código de moeda inválido")
             return
 
         result = convert_currency(amount, from_currency, to_currency)
