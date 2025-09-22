@@ -1,4 +1,8 @@
+import sys, os
 import unittest
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from currency_converter import convert_currency, get_available_currencies
 
 class TestCurrencyConverter(unittest.TestCase):
