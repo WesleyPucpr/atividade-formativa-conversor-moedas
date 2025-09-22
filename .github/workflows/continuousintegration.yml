@@ -16,11 +16,40 @@ jobs:
         with:
           linter: pylint
 
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      -
+         # Add support for more platforms with QEMU (optional)
+        # https://github.com/docker/setup-qemu-action
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: user/app:latest
+
   discord:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run Discord Webhook
-        uses: johnnyhuy/actions-discord-git-webhook@main
+        uses: Sniddl/discord-commits@v1.6
         with:
-          webhook_url: ${{ secret.DISCORD_WEBHOOK }}
+          webhook: ${{ secret.DISCORD_WEBHOOK }}
+          template: "avatar-with-link"
+          include-extras: true
+
+
+
+
+
+
+
